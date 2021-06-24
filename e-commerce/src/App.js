@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import Products from './Components/Product/Products'
+import {
+  MDBContainer,
+  MDBNavbar,
+  MDBNavbarBrand
+} from 'mdb-react-ui-kit';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <MDBNavbar dark bgColor='dark'>
+        <MDBContainer fluid>
+          <a href='#' className='navbar-brand'>Navbar</a>
+          <MDBNavbarBrand href='#'>Login</MDBNavbarBrand>
+          <MDBNavbarBrand href='#' className='justify-content-end'>Cart</MDBNavbarBrand>
+        </MDBContainer>
+      </MDBNavbar>
+      <Products />
+    </>
   );
 }
 
