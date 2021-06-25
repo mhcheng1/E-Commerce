@@ -7,6 +7,7 @@ import {
 } from 'mdb-react-ui-kit';
 import GoogleLogin from 'react-google-login'
 import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
+import Login from './Components/Login/Login'
 
 function App() {
   return (
@@ -20,10 +21,11 @@ function App() {
           </MDBContainer>
         </MDBNavbar>
         <Switch>
+          <Route path="/login">
+            <Login />
+          </Route>
           <Route path="/">
             <Products />
-          </Route>
-          <Route path="/login">
           </Route>
         </Switch>
       </Router>
