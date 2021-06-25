@@ -5,18 +5,28 @@ import {
   MDBNavbar,
   MDBNavbarBrand
 } from 'mdb-react-ui-kit';
+import GoogleLogin from 'react-google-login'
+import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
 
 function App() {
   return (
     <>
-      <MDBNavbar dark bgColor='dark'>
-        <MDBContainer fluid>
-          <a href='#' className='navbar-brand'>Navbar</a>
-          <MDBNavbarBrand href='#'>Login</MDBNavbarBrand>
-          <MDBNavbarBrand href='#' className='justify-content-end'>Cart</MDBNavbarBrand>
-        </MDBContainer>
-      </MDBNavbar>
-      <Products />
+      <Router>
+        <MDBNavbar dark bgColor='dark'>
+          <MDBContainer fluid>
+            <Link to="/" className='navbar-brand'>Navbar</Link>
+            <Link to="/login" className='navbar-brand'>Login</Link>
+            <MDBNavbarBrand href='#' className='justify-content-end'>Cart</MDBNavbarBrand>
+          </MDBContainer>
+        </MDBNavbar>
+        <Switch>
+          <Route path="/">
+            <Products />
+          </Route>
+          <Route path="/login">
+          </Route>
+        </Switch>
+      </Router>
     </>
   );
 }
