@@ -7,7 +7,6 @@ import {
 } from 'mdb-react-ui-kit';
 import { GoogleLogin, GoogleLogout } from 'react-google-login'
 import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
-import Login from './Components/Login/Login'
 import {useState, useEffect} from 'react'
 
 
@@ -35,7 +34,8 @@ export default function App() {
         <MDBNavbar dark bgColor='dark'>
           <MDBContainer fluid>
             <Link to="/" className='navbar-brand'>Navbar</Link>
-            {user ? <div>
+            {user ? <div className="d-flex flex-row"> 
+              <div><Link className='navbar-brand'> Welcome {user.givenName} !</Link> </div>
               <GoogleLogout
               clientId={clientID}
               onLogoutSuccess={handleLogoutSuccess}
@@ -51,12 +51,11 @@ export default function App() {
                 cookiePolicy={'single_host_origin'}
               /></div> 
             }
-            <MDBNavbarBrand href='#' className='justify-content-end'>Cart</MDBNavbarBrand>
+            <MDBNavbarBrand href='/Cart' className='justify-content-end'>Cart</MDBNavbarBrand>
           </MDBContainer>
         </MDBNavbar>
         <Switch>
-          <Route path="/login">
-            <Login />
+          <Route path="/Cart">
           </Route>
           <Route path="/">
             <Products />

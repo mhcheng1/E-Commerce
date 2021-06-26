@@ -1,2 +1,3 @@
-
+node_modules/
 e-commerce/.env
+server/package-lock.json
