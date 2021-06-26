@@ -1,9 +1,9 @@
 import React from 'react'
-import GoogleLogin from 'react-google-login'
+import { GoogleLogin, GoogleLogout } from 'react-google-login'
+
 
 export default function Login() {
   const responseGoogle=(response)=>{
-    console.log(response);
     console.log(response.profileObj);
   }
 

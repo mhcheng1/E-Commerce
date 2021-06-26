@@ -5,18 +5,52 @@ import {
   MDBNavbar,
   MDBNavbarBrand
 } from 'mdb-react-ui-kit';
-import GoogleLogin from 'react-google-login'
+import { GoogleLogin, GoogleLogout } from 'react-google-login'
 import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
 import Login from './Components/Login/Login'
+import {useState, useEffect} from 'react'
 
-function App() {
+
+export default function App() {
+  const clientID = "934174265842-1tss91slckamufhpjchn25kelu4pk7gm.apps.googleusercontent.com"
+  const [user, setUser] = useState(null);
+
+  const responseGoogle=(response)=>{
+    console.log(response.profileObj);
+    setUser(response.profileObj)
+  }
+
+  const handleLogoutSuccess = (response) => {
+    console.log("Logout Success ", response);
+    setUser(null);
+  }
+
+  const handleLogoutFailure = error => {
+    console.log("Logout Failure ", error);
+  }
+
   return (
     <>
       <Router>
         <MDBNavbar dark bgColor='dark'>
           <MDBContainer fluid>
             <Link to="/" className='navbar-brand'>Navbar</Link>
-            <Link to="/login" className='navbar-brand'>Login</Link>
+            {user ? <div>
+              <GoogleLogout
+              clientId={clientID}
+              onLogoutSuccess={handleLogoutSuccess}
+              onFailure={handleLogoutFailure}
+            />
+            </div> :
+            <div>
+              <GoogleLogin
+                clientId= {clientID}
+                buttonText="Login"
+                onSuccess={responseGoogle}
+                onFailure={responseGoogle}
+                cookiePolicy={'single_host_origin'}
+              /></div> 
+            }
             <MDBNavbarBrand href='#' className='justify-content-end'>Cart</MDBNavbarBrand>
           </MDBContainer>
         </MDBNavbar>
@@ -32,5 +66,3 @@ function App() {
     </>
   );
 }
-
-export default App;
