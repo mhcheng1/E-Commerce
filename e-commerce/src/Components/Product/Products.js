@@ -2,6 +2,7 @@ import React from 'react'
 import {useState, useEffect} from 'react'
 import Product from './Product'
 import {  MDBRow } from 'mdbreact'
+import axios from 'axios'
 
 export default function Products() {
     const [products, setProduct] = useState([
@@ -10,6 +11,9 @@ export default function Products() {
     ])
 
     useEffect(() => {
+        axios.get("http://localhost:3001/test").then(response =>{
+                console.log(response.data)
+            })
     }, [])
 
     return (

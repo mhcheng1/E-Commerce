@@ -3,7 +3,9 @@ const cors = require("cors"); // encountered issue with CORS policy blocking
 require("dotenv").config();
 const mysql = require("mysql");
 
+// enter in command prompt to initialize MySQL server
 // C:\Program Files\MySQL\MySQL Server 8.0\bin
+// mysqld --console
 
 const app = express();
 app.use(cors());
@@ -25,11 +27,6 @@ function handleDisconnect() {
 
   connection.connect(function (err) {
     console.log("mysql connected")
-    connection.query("SELECT * FROM test", function (err, result, fields) {
-        if (err) throw err;
-        console.log(result);
-    });
-
     // The server is either down
     if (err) {
       // or restarting (takes a while sometimes).
@@ -48,22 +45,19 @@ function handleDisconnect() {
       throw err; // server variable configures this)
     }
   });
+
+  app.get('/test', function (req, res) {
+        connection.connect(function (err) {
+            console.log("mysql connected")
+            connection.query("SELECT * FROM test", function (err, result, fields) {
+                if (err) throw err;
+                console.log(result);
+                res.send(result)
+            });
+        });
+    });
 }
 
 handleDisconnect();
-
-app.get("/", (req, res) => {
-  res.send("go to /my-project to see my project");
-});
-
-
-app.post("/test", (req, res) => {
-  res.send("test get");
-  res.sendStatus(999);
-});
-
-app.get("/", (req, res) => {
-    res.send('go to /my-project to see my project')
-})
 
 app.listen(3001);
